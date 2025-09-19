@@ -1,0 +1,27 @@
+{
+  "name": "registro-patrona",
+  "version": "1.0.0",
+  "description": "An example of oAuth2.0 using node",
+  "main": "src/server.js",
+  "repository": "git@github.com:centro-de-padres-colegio-patrona/registro_patrona.git",
+  "author": "l.herreramena",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "17.2.2",
+    "ejs": "^3.1.9",
+    "express": "^4.21.2",
+    "express-session": "^1.17.3",
+    "mongoose": "^7.6.0",
+    "nodemailer": "^7.0.5",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "canvas": "^3.2.0",
+    "jimp": "^0.16.1",
+    "qrcode": "^1.5.1"
+  }
+}
