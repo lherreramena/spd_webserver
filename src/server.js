@@ -33,8 +33,8 @@ const app = express()
 
 app.use(express.static('public'));
 
-app.use(express.static(__dirname + '/public'))
-app.use(express.static(__dirname + '/src'))
+//app.use(express.static(__dirname + '/public'))
+//app.use(express.static(__dirname + '/src'))
 
 app.use(express.urlencoded({ extended: true }));
 //app.use(session({ secret: 'Peroconrespeto', resave: false, saveUninitialized: false }));
@@ -48,11 +48,11 @@ app.use(express.json());
 
 // Ruta para la página "hello world" (index.html)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 
-// Start the server on port 8080
+// Start the server
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 })
