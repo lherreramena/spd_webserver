@@ -2,12 +2,12 @@
   "name": "registro-patrona",
   "version": "1.0.0",
   "description": "An example of oAuth2.0 using node",
-  "main": "src/server.js",
+  "main": "app/index.js",
   "repository": "git@github.com:centro-de-padres-colegio-patrona/registro_patrona.git",
   "author": "l.herreramena",
   "license": "MIT",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node app/index.js"
   },
   "dependencies": {
     "axios": "^0.21.1",

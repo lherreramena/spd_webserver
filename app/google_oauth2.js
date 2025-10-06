@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const db_support = require('./db_support');
 
 require('dotenv').config();
 
@@ -33,11 +34,6 @@ passport.use(new GoogleStrategy({
           email: profile.emails?.[0].value || '',
           photo: profile.photos?.[0].value || '',
           personalInfo: {nombres: profile.name.givenName, apellidos: profile.name.familyName},
-          listaHijosColegio: null,
-          listaPadres: null,
-          listaOtros: null,
-          listaAsistentes: null,
-          pagos: null
         });
         //console.log('User:', user);
       } /*else {
