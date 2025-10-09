@@ -1,31 +1,32 @@
-from flask import Blueprint, request, jsonify
+from fastapi import APIRouter, HTTPException
+from schemas.user_schema import UserCreate, UserOut
 from services.user_service import *
-from schemas.user_schema import serialize_user
 
-import logging
-logger = logging.getLogger(__name__)
+router = APIRouter()
 
-user_bp = Blueprint('user_bp', __name__)
-
-@user_bp.route('/', methods=['GET'])
+@router.get("/", response_model=list[UserOut])
 def list_users():
-    return jsonify([serialize_user(u) for u in get_all_users()])
+    return get_all_users()
 
-@user_bp.route('/<user_id>', methods=['GET'])
-def get_user_by_id(user_id):
+@router.get("/{user_id}", response_model=UserOut)
+def get_user_by_id(user_id: str):
     user = get_user(user_id)
-    return jsonify(serialize_user(user)) if user else ('User not found', 404)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
 
-@user_bp.route('/', methods=['POST'])
-def add_user():
-    user = create_user(request.json)
-    return jsonify(serialize_user(user)), 201
+@router.post("/", response_model=UserOut, status_code=201)
+def add_user(user_data: UserCreate):
+    return create_user(user_data)
 
-@user_bp.route('/<user_id>', methods=['PUT'])
-def modify_user(user_id):
-    user = update_user(user_id, request.json)
-    return jsonify(serialize_user(user)) if user else ('User not found', 404)
+@router.put("/{user_id}", response_model=UserOut)
+def modify_user(user_id: str, user_data: UserCreate):
+    user = update_user(user_id, user_data)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
 
-@user_bp.route('/<user_id>', methods=['DELETE'])
-def remove_user(user_id):
-    return ('User deleted', 204) if delete_user(user_id) else ('User not found', 404)
+@router.delete("/{user_id}", status_code=204)
+def remove_user(user_id: str):
+    if not delete_user(user_id):
+        raise HTTPException(status_code=404, detail="User not found")
