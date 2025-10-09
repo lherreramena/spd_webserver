@@ -1,11 +1,11 @@
-from flask import Blueprint, request, jsonify
+from fastapi import APIRouter, Depends, Request, HTTPException
 from services.device_service import *
 from schemas.device_schema import serialize_device
 
 import logging
 logger = logging.getLogger(__name__)
 
-device_bp = Blueprint('device_bp', __name__)
+router = Blueprint('device_bp', __name__)
 
 @device_bp.route('/', methods=['GET'])
 def list_devices():

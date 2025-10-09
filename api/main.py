@@ -1,4 +1,4 @@
-from flask import Flask
+from fastapi import FastAPI
 from dotenv import load_dotenv
 
 import os
@@ -19,9 +19,11 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
-logger.info("Starting Flask API...")
-app = Flask(__name__)
-app.register_blueprint(user_bp, url_prefix='/users')
+logger.info("Starting API...")
+
+app = FastAPI()
+
+app.include_router(user_bp, url_prefix='/users')
 app.register_blueprint(device_bp, url_prefix='/devices')
 
 if __name__ == '__main__':
