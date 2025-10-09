@@ -109,7 +109,7 @@ const registroEntradasSchema = new mongoose.Schema({
 });
 
 const password = encodeURIComponent(`${process.env.DB_PASSWORD}`);
-const uri = `mongodb+srv://${process.env.DB_USER}:${password}@${process.env.DB_CLUSTER}/?retryWrites=true&w=majority&appName=${process.env.DB_NAME}`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${password}@${process.env.DB_CLUSTER}/${process.env.DB_DATABASE_NAME}?retryWrites=true&w=majority&appName=${process.env.DB_NAME}`;
 
 mongoose.connection.on('connected', () => {
   console.log('MongoDB conectado');

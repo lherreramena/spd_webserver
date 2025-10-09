@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!--script src="./dist/vivagraph.js"></script-->
 	<script type='text/javascript'></script>
-	<!--script src="graph.js"></script-->
 	<script src="../middleware/api_rest_client.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <link rel="shortcut icon" href="#" />
@@ -323,7 +321,6 @@ form {
 <div class="topnav">
 	<a class="active" href="www.bigchallenge.cl">Home</a>
 	<a href="https://componentgraph.atlassian.net/l/c/X0i2v3AT">Acerca de</a>
-	<!--<a href="https://forms.gle/2DKiNXbSaJYhiZRx8" target="_blank">Encuesta</a> -->
 	<div class="search-container">
 		<input type="text" placeholder="Escribir aqui..." name="search" id="search_text">
 		<button onclick="rest_api_get_token()">Buscar</button>
@@ -421,20 +418,6 @@ form {
       <!--button type="button" id="submit-button" disabled>Submit</button-->
   </form>
 </div>  
-  <!--div class="item5"-->
-    <!--Footer-->
-      <!--button class="button button2" onclick="rest_api_inc_left()">++ Izq</button>
-      <button class="button button2" onclick="rest_api_inc_right()">++ Der</button>
-      <form action="/action_page.php">
-      <textarea name="display" id="display_stdout" font-size="8px" rows="19" cols="98">Display Output</textarea>
-      <br><br>
-      </form>
-      <button class="button button2" onclick="rest_api_dec_left()">-- Izq</button>
-      <button class="button button2" onclick="rest_api_dec_right()">-- Der</button>
-      <div class="DivControl">
-        <button class="button button2" onclick="rest_api_clear_score()">Borrar Score</button>
-      </div>
-  </div-->
 </div>
 </div>
 
@@ -448,11 +431,6 @@ form {
           const li = document.createElement('li');
           li.textContent = key;
           li.className = 'tree-item';
-          //li.onclick = () => selectItem(key, data[key]);
-          /*li.onclick = function(event) {
-                    event.stopPropagation();
-                    selectItem(li, data[key]);
-                };*/
           parentElement.appendChild(li);
 
           if (typeof data[key] === 'object' && data[key] !== null) {
@@ -464,32 +442,20 @@ form {
               createTreeView(data[key], ul);
               li.appendChild(ul);
           }
-
-          /*li.addEventListener('click', (event) => {
-              event.stopPropagation();
-              //document.getElementById('item-details').textContent = JSON.stringify(data[key], null, 2);
-              selectItem(data[key]);
-          });*/
       }
   }
 
   function selectItem(item, data) {
     const items = document.querySelectorAll('.tree-item');
     items.forEach(item => item.classList.remove('selected'));
-    //const selectedItem = Array.from(items).find(item => item.textContent === key);
     item.classList.add('selected');
-    /*document.getElementById('key').value = key;
-    document.getElementById('value').value = value;*/
     displayParameters(data);
   }
 
   function displayParameters(data) {
-    //editFrom = document.getElementById("edit-form");
-    //editFrom.attr('hidden', false);
     const parametersDiv = document.getElementById('parameters');
     parametersDiv.innerHTML = '';
     if ('device_id' in data) {
-      //console.log(`data['device_id']: ${JSON.stringify(data['device_id'])}`);
       for (const key in data) {
         console.log(`key: ${key}`)
         const metadata = data[key];
@@ -509,21 +475,18 @@ form {
                 input.setAttribute("id", it.id);
                 input.setAttribute("name", key);
                 input.setAttribute("value", JSON.stringify(it));
-                //input.setAttribute("info", it); 
 
                 const label = document.createElement("label");
                 label.setAttribute("for", it.id);
                 label.textContent = it.label;
 
                 input.onclick = function(event) {
-                        //event.stopPropagation();
                         console.log('El radio button seleccionado es:', event.target.value);
                         info = JSON.parse(event.target.value);
                         console.log('Qty:', info.qty);
                         const start_date = document.getElementById('start-date');
                         console.log('Start Date: ', start_date.value);
                         const stop_date = document.getElementById('stop-date');
-                        //const new_date = Date.parse(start_date.value);
                         var new_date = new Date(start_date.value);
                         console.log('Start Date: ', new_date);
                         new_date.setDate(new_date.getDate() + info.qty - 1);
@@ -558,7 +521,6 @@ form {
   }
 
   document.getElementById('submit-button').onclick = function() {
-      //alert('Values saved!');
       this.disabled = true;
       submitBuyLicense();
   };
@@ -568,18 +530,7 @@ form {
     console.log(`${getFuncName()}:`);
     createTreeView(jsonData, jsonTree);
   });
-  //createTreeView(jsonData, jsonTree);
 </script>
 
-<!--<div class="DivControl">
-  <button class="button button2" onclick="rest_api_clear_score()">Borrar Score</button>
-</div>-->
-
-<!--<form action="/action_page.php">
-  <textarea name="display" id="display_stdout" rows="18" cols="100">Display Output</textarea>
-  <textarea name="consola" id="console_stdout" rows="36" cols="100">Standard Output</textarea>
-  <br><br>
-</form>-->
-  
 </body>
 </html>
